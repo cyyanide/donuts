@@ -1,0 +1,21 @@
+{% extends 'donuts/base.html' %}
+
+{% block content %}
+
+<h1> Restaurants: </h1>
+    <ol>
+
+        {% for restaurant in restaurants %}
+
+            <li>
+            {{ restaurant.name }} <br>
+            <i> {{ restaurant.description }} </i> <br>
+
+                <a href="/menu/{{ restaurant.restaurant_id }}"> SHOW MENU </a>
+
+            </li>
+
+        {% endfor %}
+
+    </ol>
+{% endblock %}
