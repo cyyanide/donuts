@@ -1,0 +1,15 @@
+{% extends 'donuts/base.html' %}
+
+{% block content %}
+
+    <h1> Book a table in restaurant {{ restaurant.name }} </h1>
+
+       <form method="post">
+
+            {% csrf_token %}
+             {{ form.as_p }}
+             <input type="submit" value="Book!">
+
+       </form>
+
+{% endblock %}

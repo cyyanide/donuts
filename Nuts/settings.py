@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'Nuts.wsgi.application'
 DATABASES = {
     'default': {
         'HOST': 'localhost',
-        'NAME': 'donutsdb2',
+        'NAME': 'donutsdb3',
         'ENGINE': 'django.db.backends.postgresql',
         'USER': 'postgres',
         'PASSWORD': 'coderslab',

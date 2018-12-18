@@ -6,7 +6,7 @@
 
     <ul>
 
-    {% for dish in restaurant.menu.dish_set.all %}
+    {% for dish in restaurant.dish_set.all %}
 
     <li>
         {{ dish.dish_name }},
@@ -19,6 +19,9 @@
     </ul>
 
 
-    <a href="/book/{{ restaurant.id }}"> Book a table! </a>
+    <a href="/book/{{ restaurant.pk }}"> Book a table! </a>
+
+    <br><a href="{{ request.META.HTTP_REFERER|escape }}">Back</a>
 
 {% endblock %}
+

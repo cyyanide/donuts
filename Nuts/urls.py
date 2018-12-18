@@ -22,6 +22,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^$', RestaurantsView.as_view()),
     url(r'^menu/(?P<restaurant_id>(\d)+)$', ShowMenuView.as_view()),
-
+    url(r'^addrestaurant$', AddRestaurantView.as_view()),
+    url(r'^adddish/(?P<restaurant_id>(\d)+)$', AddDishView.as_view()),
+    url(r'^deletedish/(?P<restaurant_id>(\d)+)/(?P<dish_id>(\d)+)$', DeleteDishView.as_view()),
+    url(r'^deleterestaurant/(?P<restaurant_id>(\d)+)$', DeleteRestaurantView.as_view()),
+    url(r'^book/(?P<restaurant_id>(\d)+)$', BookingView.as_view()),
 
 ]

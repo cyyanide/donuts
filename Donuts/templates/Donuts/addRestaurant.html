@@ -1,0 +1,15 @@
+{% extends 'donuts/base.html' %}
+
+{% block content %}
+
+    <h1> Register your home-restaurant here! </h1>
+
+       <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Register">
+
+          <p> You will be able to add your menu later in this process. Click "register" to continue. </p>
+    </form>
+
+{% endblock %}
