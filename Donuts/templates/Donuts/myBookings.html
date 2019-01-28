@@ -1,0 +1,31 @@
+{% extends 'donuts/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <section>
+        <div class="container">
+
+            <h1> Your bookings: </h1>
+
+            <ul>
+                {% for booking in who.booking_set.all %}
+
+                    <li>
+                        {{ booking.restaurant }}
+                        {{ booking.date }}
+                        {{ booking.booking_time_start }}-{{ booking.booking_time_end }}
+                        {{ booking.people }}
+
+                    </li>
+                {% endfor %}
+
+            </ul>
+
+        </div>
+    </section>
+
+    <script src='{% static "js/scrolldown.js" %}'></script>
+
+{% endblock %}

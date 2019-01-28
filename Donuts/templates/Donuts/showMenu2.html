@@ -1,0 +1,49 @@
+{% extends 'donuts/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <h2> Menu in restaurant {{ restaurant.name }} </h2>
+
+    <h5> Opening hours: {{ restaurant.opening_time }} - {{ restaurant.closing_time }}</h5>
+
+    {% for dish in restaurant.dish_set.all %}
+
+        <section>
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 order-lg-2">
+                        <div class="p-5">
+                            <img class="img-fluid rounded-circle" src="/media/{{ dish.dish_picture }}/" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 order-lg-1">
+                        <div class="p-5">
+                            <h2 class="display-4"> {{ dish.dish_name }}, {{ dish.price }} PLN </h2>
+                            <p> {{ dish.dish_description }} </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endfor %}
+
+
+
+
+    {% if request.user.is_authenticated %}
+
+        <p><a href="/book/{{ restaurant.pk }}" class="btn btn-secondary"></i> Book table!</a></p>
+
+    {% endif %}
+
+
+
+
+
+
+
+    <script src='{% static "js/scrolldown.js" %}'></script>
+
+{% endblock %}

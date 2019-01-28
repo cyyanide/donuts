@@ -1,16 +1,18 @@
 {% extends 'donuts/base.html' %}
 
+{% load static %}
+
 {% block content %}
 
     <h1> Do you want to permanently delete your restaurant {{ restaurant.name }} from our database? </h1>
 
-        <form method="post">
-            <button type="submit" name="decision" value="yes">Yes</button>
-            <button type="submit" name="decision" value="no">No</button>
-                {% csrf_token %}
-        </form>
+    <form method="post">
+        <button type="submit" name="decision" value="yes">Yes</button>
+        <button type="submit" name="decision" value="no">No</button>
+        {% csrf_token %}
+    </form>
 
-
+    <script src='{% static "js/scrolldown.js" %}'></script>
 
 {% endblock %}
 

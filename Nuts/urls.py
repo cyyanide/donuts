@@ -16,7 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url
+from django.views.static import serve
+
 from Donuts.views import *
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,8 +28,19 @@ urlpatterns = [
     url(r'^menu/(?P<restaurant_id>(\d)+)$', ShowMenuView.as_view()),
     url(r'^addrestaurant$', AddRestaurantView.as_view()),
     url(r'^adddish/(?P<restaurant_id>(\d)+)$', AddDishView.as_view()),
-    url(r'^deletedish/(?P<restaurant_id>(\d)+)/(?P<dish_id>(\d)+)$', DeleteDishView.as_view()),
+    url(r'^controlpanel/deletedish/(?P<restaurant_id>(\d)+)/(?P<dish_id>(\d)+)$', DeleteDishView.as_view()),
     url(r'^deleterestaurant/(?P<restaurant_id>(\d)+)$', DeleteRestaurantView.as_view()),
     url(r'^book/(?P<restaurant_id>(\d)+)$', BookingView.as_view()),
+    url(r'^register$', RegisterView.as_view()),
+    url(r'^login$', LoginView.as_view()),
+    url(r'^logout$', LogoutView.as_view()),
+    url(r'^bookings/(?P<restaurant_id>(\d)+)$', AllBookingsView.as_view()),
+    url(r'^controlpanel/(?P<restaurant_id>(\d)+)$', RestaurantControlPanelView.as_view()),
+    url(r'^mybooking/(?P<who_id>(\d)+)$', MyBookingView.as_view()),
+    url(r'^more', LearnMoreView.as_view()),
 
 ]
+
+# w trybie debug możemy dodać ten adres do naszych ścieżek url
+if settings.DEBUG:
+    urlpatterns.append(url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}))

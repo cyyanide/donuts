@@ -1,0 +1,21 @@
+{% extends 'donuts/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <h1> Edit your profile </h1>
+
+    <form method="post">
+
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" class="btn btn-secondary" value="Save changes">
+
+    </form>
+
+    <br><a href="{{ request.META.HTTP_REFERER|escape }}">Back</a>
+    <script src='{% static "js/scrolldown.js" %}'></script>
+
+
+{% endblock %}

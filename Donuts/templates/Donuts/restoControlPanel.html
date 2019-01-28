@@ -1,0 +1,48 @@
+{% extends 'donuts/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <section>
+        <div class="container">
+
+            <h1> Control Panel </h1>
+
+            <form method="post">
+                {{ form.as_p }}
+                <button type="submit">Save changes</button>
+                {% csrf_token %}
+            </form>
+
+
+            <br>Menu:
+            <ul>
+                {% for dish in restaurant.dish_set.all %}
+                    <li>
+                        {{ dish.dish_name }},
+                        {{ dish.price }} PLN<br>
+                        <i> {{ dish.dish_description }} </i>
+                        <p><a href="deletedish/{{ restaurant.pk }}/{{ dish.pk }}"> Delete dish </a></p>
+                    </li>
+
+                {% endfor %}
+            </ul>
+
+
+            <form action="/adddish/{{ restaurant.pk }}" method="get">
+                <button type="submit" class="btn btn-secondary"> add dish to your restaurant</button>
+            </form>
+
+            <form action="/deleterestaurant/{{ restaurant.pk }}" method="get">
+
+                <p></p>
+                <button type="submit" class="btn btn-secondary"> Delete restaurant</button>
+            </form>
+
+            <script src='{% static "js/scrolldown.js" %}'></script>
+
+        </div>
+    </section>
+
+{% endblock %}

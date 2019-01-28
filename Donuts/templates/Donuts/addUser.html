@@ -1,0 +1,26 @@
+{% extends 'donuts/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <section>
+        <div class="container">
+
+            <h1> Create your account within 2 minutes! </h1>
+
+            <form method="post">
+
+                {% csrf_token %}
+                {{ form.as_p }}
+
+                <button type="submit" class="btn btn-secondary" value="Register">Register</button>
+
+            </form>
+
+        </div>
+    </section>
+
+    <script src='{% static "js/scrolldown.js" %}'></script>
+
+{% endblock %}

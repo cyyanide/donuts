@@ -1,0 +1,34 @@
+{% extends 'donuts/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <section>
+        <div class="container">
+
+            <h1> Booking summary: </h1>
+
+            <p>Restaurant {{ booking.restaurant }}</p>
+
+            {% if form.errors.date %}
+
+                {{ form.errors.date }}
+
+                <br><a href="/">Go back</a>
+
+            {% else %}
+                <p> time: {{ booking.booking_time_start }}-{{ booking.booking_time_end }} </p>
+                <p> people: {{ booking.people }} </p>
+
+                <p>booking reference number: {{ booking.id }}</p>
+
+
+                <p> date: {{ booking.date }} </p>
+            {% endif %}
+        </div>
+    </section>
+
+    <script src='{% static "js/scrolldown.js" %}'></script>
+
+{% endblock %}

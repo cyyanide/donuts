@@ -1,0 +1,39 @@
+{% extends 'donuts/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+    <section>
+
+        {% if request.booking.who_id %}
+            <div class="container">
+
+
+                <h1> All bookings for upcoming week: </h1>
+                <ol>
+
+                    {% for booking in bookings %}
+
+                        <li>
+                            Date: {{ booking.date }} <br>
+                            Start: {{ booking.booking_time_start }} <br>
+                            End: {{ booking.booking_time_end }} <br>
+                            People: {{ booking.people }}
+                        </li>
+
+                    {% endfor %}
+                </ol>
+
+            </div>
+
+        {% else %}
+
+            <p> You do not have any bookings yet :( </p>
+        {% endif %}
+    </section>
+
+    <script src='{% static "js/scrolldown.js" %}'></script>
+
+{% endblock %}

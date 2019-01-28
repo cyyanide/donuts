@@ -1,23 +1,146 @@
-<!doctype html>
-<html>
-    <head><meta charset="utf-8"></head>
-    <body>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
 
-    {% block header %}
-        <h1>Welcome to Donuts!</h1>
-    {% if username != AnonymousUser %}
-        <p>Witaj {{username}} <a href="http://127.0.0.1:8000/logout">Logout</a></p>
-    {% endif %}
-    {% endblock %}
+<head>
 
-    {% block content %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    {% endblock %}
+    <title>Donut</title>
 
-    {% block footer %}
-        <h4>Wersja 1.0</h4>
-        <h5> {% now "jS F Y H:i" %} </h5>
-    {% endblock %}
+    <!-- Bootstrap core CSS -->
+    <link href='{% static "vendor/bootstrap/css/bootstrap.min.css" %}' rel="stylesheet">
 
-    </body>
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i"
+          rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href='{% static "css/one-page-wonder.min.css" %}' rel="stylesheet">
+
+</head>
+
+<body>
+{% block header %}
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">Home</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+
+                    {% if request.user.is_authenticated and request.user.restaurant %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/controlpanel/{{ request.user.restaurant.pk }}">Manage your
+                                restaurant</a>
+                        </li>
+                    {% endif %}
+                    {% if request.user.is_authenticated and not request.user.restaurant %}
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/addrestaurant">Add new restaurant</a>
+                        </li>
+                    {% endif %}
+                    {% if not request.user.is_authenticated %}
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/register">Sign Up</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">Log In</a>
+                        </li>
+                    {% endif %}
+                    {% if request.user.is_authenticated %}
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/bookings/{{ request.user.restaurant.pk }}">Bookings</a>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Logged in as {{ request.user.username }}</a>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">Log out</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="masthead text-center text-white">
+        <div class="masthead-content">
+            <div class="container">
+                <h1 class="masthead-heading mb-0">Donut <br> Eat the way you want</h1>
+                <h2 class="masthead-subheading mb-0">Share your passion with others</h2>
+                <a href="/more" class="btn btn-primary btn-xl rounded-pill mt-5">Learn More</a>
+            </div>
+        </div>
+        <div class="bg-circle-1 bg-circle"></div>
+        <div class="bg-circle-2 bg-circle"></div>
+        <div class="bg-circle-3 bg-circle"></div>
+        <div class="bg-circle-4 bg-circle"></div>
+    </header>
+
+
+    {% for restaurant in restaurants %}
+
+        <section>
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 order-lg-2">
+                        <div class="p-5">
+                            <img class="img-fluid rounded-circle" src="/media/{{ restaurant.picture }}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 order-lg-1">
+                        <div class="p-5">
+                            <h2 class="display-4"> {{ restaurant.name }} </h2>
+                            <p> {{ restaurant.description }} </p>
+                            <p><a href="/menu/{{ restaurant.pk }}" class="btn btn-secondary"><i
+                                    class="fas fa-utensils"></i> Menu</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endfor %}
+
+
+
+
+
+
+
+{% endblock %}
+
+
+{% block content %}
+{% endblock %}
+
+<!-- Footer -->
+{% block footer %}
+    <footer class="py-5 bg-black">
+        <div class="container">
+            <p class="m-0 text-center text-white small">Copyright &copy; Donut </p>
+        </div>
+        <!-- /.container -->
+    </footer>
+{% endblock %}
+
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
 </html>
+
